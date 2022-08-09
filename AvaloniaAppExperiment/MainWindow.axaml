@@ -1,0 +1,165 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        MinWidth="968" MinHeight="688"
+        x:Class="AvaloniaAppExperiment.MainWindow"
+        Title="PokerVanc">
+    
+    <Window.Styles>
+        <Style Selector="Label.MenuItem">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="#abacac" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="0, 0, 0, 6" />
+        </Style>
+        <Style Selector="Label.MenuItem.Active">
+            <Setter Property="Foreground" Value="white" />
+            <Setter Property="BorderBrush" Value="#d70022" />
+        </Style>
+        <Style Selector="Border.TablePreviewRightSideBorder">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#666666" />
+        </Style>
+        <Style Selector="Grid.TablePreviewRightSide">
+            <Setter Property="Width" Value="310" />
+            <Setter Property="Background" Value="#212121" />
+        </Style>
+        <Style Selector="#MyDataGrid > DataGridTextColumn">
+            <!-- <Setter Property="HorizontalContentAlignment" Value="Center" /> -->
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto, *, Auto, Auto">
+        <!-- Top Section -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Height="50" Background="#000000">
+            <Rectangle Grid.Column="0" Fill="green" Width="200">
+
+            </Rectangle>
+            <Rectangle Grid.Column="1"></Rectangle>
+            <Rectangle Grid.Column="2" Fill="green" Width="200">
+
+            </Rectangle>
+        </Grid>
+
+        <!-- Middle Section -->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *, Auto" Background="#000000">
+            <Rectangle Grid.Column="0" Width="3"></Rectangle>
+
+            <!-- Left Island -->
+            <Grid Grid.Column="1" RowDefinitions="Auto, Auto, *" Background="skyblue">
+
+                <!-- Top Navbar -->
+                <Grid Grid.Row="0" ColumnDefinitions="*, Auto" VerticalAlignment="Center">
+
+                    <!-- Games Menu -->
+                    <Border Grid.Column="0" Background="#212121" CornerRadius="5, 5, 0 ,0">
+                        <Grid ColumnDefinitions="*, *, *, *, *, *, *, *, *, *">
+                            <Label Grid.Column="0" Classes="MenuItem Active">Cash</Label>
+                            <Label Grid.Column="1" Classes="MenuItem">Zoom</Label>
+                            <Label Grid.Column="2" Classes="MenuItem">Home Games</Label>
+                            <Label Grid.Column="3" Classes="MenuItem">6+ Hold'em</Label>
+                            <Label Grid.Column="4" Classes="MenuItem">Tempest</Label>
+                            <Label Grid.Column="5" Classes="MenuItem">Sit &amp; Go</Label>
+                            <Label Grid.Column="6" Classes="MenuItem">Spin &amp; Go</Label>
+                            <Label Grid.Column="7" Classes="MenuItem">Kick-Off</Label>
+                            <Label Grid.Column="8" Classes="MenuItem">Sunday Million</Label>
+                            <Label Grid.Column="9" Classes="MenuItem">Events</Label>
+                        </Grid>
+                    </Border>
+
+                    <!-- Real/Play Money Radio Inputs -->
+                    <Grid Grid.Column="1" RowDefinitions="*, *">
+                        <Viewbox Height="18">
+                            <RadioButton IsChecked="True"
+                                         GroupName="RealOrPlayMoney"
+                                         Content="Real Money" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1" Height="18">
+                            <RadioButton IsChecked="False"
+                                         GroupName="RealOrPlayMoney"
+                                         Content="Play Money" />
+                        </Viewbox>
+                    </Grid>
+
+                </Grid>
+
+                <!-- Filtering Section -->
+                
+                <Grid Background="#2e2f30" Grid.Row="1" RowDefinitions="Auto, Auto" ColumnDefinitions="*, *, *, Auto">
+                    <Label Grid.Row="0" Grid.Column="0" Classes="">Game</Label>
+                    <ComboBox Grid.Row="1" Grid.Column="0" SelectedIndex="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>Inline Items</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 2</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 3</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 4</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="0" Grid.Column="1">Stakes</Label>
+                    <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>Inline Items</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 2</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 3</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 4</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="0" Grid.Column="2">Table Size</Label>
+                    <ComboBox Grid.Row="1" Grid.Column="2" SelectedIndex="0" HorizontalAlignment="Stretch">
+                        <ComboBoxItem>Inline Items</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 2</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 3</ComboBoxItem>
+                        <ComboBoxItem>Inline Item 4</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+
+                <!-- Content -->
+                <Grid Grid.Row="2" ColumnDefinitions="*, Auto">
+                    
+                    <!-- Tables List -->
+                    <Grid Grid.Column="0">
+                        <DataGrid Name="MyDataGrid" 
+                                  CanUserResizeColumns="True"
+                                  CanUserSortColumns="True"
+                                  CanUserReorderColumns="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="3*" Header="Table"  Binding="{Binding FirstName}">
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="*" Header="Stakes"  Binding="{Binding LastName}"  />
+                                <DataGridTextColumn Width="2*" Header="Game" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="1.6*" Header="Type" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="*" Header="Plrs" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="*" Header="Wait" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="*" Header="Avg Pot" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="*" Header="Plrs/Flop" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Width="*" Header="H/hr" Binding="{Binding LastName}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    
+                    <!-- Table Preview Section -->
+                    <Border Grid.Column="1" Classes="TablePreviewRightSideBorder">
+                        <Grid Classes="TablePreviewRightSide">
+                        </Grid>
+                    </Border>
+                    
+                </Grid>
+            </Grid>
+
+            <!-- Right Side-bar -->
+            <Rectangle Grid.Column="2" Width="50"></Rectangle>
+        </Grid>
+
+        <!-- Bottom Section (Ad Section) -->
+        <Grid Grid.Row="2" Height="55" Background="#000000">
+
+        </Grid>
+
+        <!-- Footer -->
+        <Grid Grid.Row="3" Height="30" Background="#212121">
+
+        </Grid>
+    </Grid>
+</Window>
